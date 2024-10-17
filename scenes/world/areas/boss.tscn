@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc5qpyr6xubv7"]
+
+[ext_resource type="PackedScene" uid="uid://dkllmwqk8sp0c" path="res://scenes/world/npc.tscn" id="1_l1rlw"]
+
+[node name="Area" type="Node2D"]
+
+[node name="Ellie" parent="." instance=ExtResource("1_l1rlw")]
+position = Vector2(64, 0)

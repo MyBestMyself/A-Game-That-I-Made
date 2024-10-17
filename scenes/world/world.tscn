@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbylv0j7p62wi"]
+
+[ext_resource type="Script" path="res://scripts/world/world.gd" id="1_svr25"]
+[ext_resource type="Texture2D" uid="uid://bvu3lkrwoj2o3" path="res://sprites/world/decoration/Table.png" id="2_eeoyq"]
+
+[node name="World" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_svr25")
+
+[node name="Table" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(128, 96)
+texture = ExtResource("2_eeoyq")
+region_enabled = true
+region_rect = Rect2(0, 0, 2560, 1920)
+
+[node name="Papers" type="Node2D" parent="."]
+
+[node name="Area" type="Node2D" parent="."]

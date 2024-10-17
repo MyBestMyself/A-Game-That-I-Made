@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbw4a384yjnev"]
+
+[ext_resource type="Script" path="res://scripts/world/paper.gd" id="1_moos3"]
+[ext_resource type="Texture2D" uid="uid://dfmolc0u16tgk" path="res://sprites/paper/paper.png" id="2_4mxxt"]
+
+[node name="Paper" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_moos3")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(2, 2)
+texture = ExtResource("2_4mxxt")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_4mxxt")

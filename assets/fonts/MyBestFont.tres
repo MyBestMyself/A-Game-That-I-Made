@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://b5hfv1r25ku65"]
+
+[ext_resource type="FontFile" uid="uid://bldpktgpf2wel" path="res://assets/fonts/Mybestfont-Regular.ttf" id="1_qbv7d"]
+
+[resource]
+base_font = ExtResource("1_qbv7d")
+spacing_glyph = -1

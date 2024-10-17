@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cobx4fnihlucj"]
+
+[ext_resource type="Script" path="res://scripts/world/dialogue_text_stamp.gd" id="1_l1egv"]
+[ext_resource type="Texture2D" uid="uid://cyctsu8dta2ij" path="res://sprites/paper/stampHuge.png" id="2_i5alm"]
+[ext_resource type="FontVariation" uid="uid://b5hfv1r25ku65" path="res://assets/fonts/MyBestFont.tres" id="3_hfgvr"]
+
+[node name="DialogueTextStamp" type="Node2D"]
+script = ExtResource("1_l1egv")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(1, 1)
+texture = ExtResource("2_i5alm")
+hframes = 4
+
+[node name="TextStamp" type="Sprite2D" parent="."]
+texture = ExtResource("2_i5alm")
+hframes = 4
+
+[node name="Label" type="Label" parent="TextStamp"]
+offset_left = -98.0
+offset_top = -15.0
+offset_right = 98.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_hfgvr")
+text = "TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText"
+autowrap_mode = 3
+max_lines_visible = 2

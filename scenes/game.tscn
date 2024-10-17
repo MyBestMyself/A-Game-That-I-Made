@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm8y4n1bytjwv"]
+
+[ext_resource type="PackedScene" uid="uid://cbylv0j7p62wi" path="res://scenes/world/world.tscn" id="1_flew5"]
+[ext_resource type="PackedScene" uid="uid://bhpcs60himhxo" path="res://scenes/world/you.tscn" id="2_djjsp"]
+[ext_resource type="PackedScene" uid="uid://drsm1g2yx3hwl" path="res://scenes/world/dialogue.tscn" id="3_ofc3j"]
+
+[node name="Game" type="Node2D"]
+texture_filter = 1
+
+[node name="World" parent="." instance=ExtResource("1_flew5")]
+
+[node name="You" parent="World" instance=ExtResource("2_djjsp")]
+
+[node name="Dialogue" parent="World/You" instance=ExtResource("3_ofc3j")]
+
+[node name="Camera2D" type="Camera2D" parent="World/You"]
+position_smoothing_enabled = true
