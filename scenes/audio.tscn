@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhgh2tnyrsjpv"]
+
+[ext_resource type="Script" path="res://scripts/Audio.gd" id="1_go44l"]
+[ext_resource type="AudioStream" uid="uid://ikldkw0fiff8" path="res://assets/audio/music/Ellie.ogg" id="2_wyccu"]
+
+[node name="Audio" type="Node"]
+script = ExtResource("1_go44l")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wyccu")
+autoplay = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]

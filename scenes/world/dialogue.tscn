@@ -99,6 +99,7 @@ _data = {
 }
 
 [node name="Dialogue Box" type="Node2D"]
+visible = false
 texture_filter = 1
 position = Vector2(0, 128)
 script = ExtResource("1_u7gxn")

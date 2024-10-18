@@ -4,7 +4,7 @@ var paper = preload("res://scenes/world/paper.tscn")
 var area = load("res://scenes/world/areas/" + Global.currentArea + ".tscn")
 
 func _ready() -> void:
-	spread_paper(500)
+	spread_paper(1000)
 	$Area.add_child(area.instantiate())
 
 #Hi Riley :o - Jack

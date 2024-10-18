@@ -1,5 +1,8 @@
 extends Node
 
+var currentSpeaker
+var textIndex
+
 var text = {
 	
 	#BOSSES
