@@ -3,7 +3,7 @@ extends Node2D
 var touchingPlayer = false
 
 func _process(delta: float) -> void:
-	if touchingPlayer and Input.is_action_just_pressed("confirm"):
+	if touchingPlayer and Input.is_action_just_pressed("confirm") and not Global.battling:
 		Dialogue.currentSpeaker = name
 		Global.playDialogue.emit()
 func _on_flip_area_entered(area: Area2D) -> void:

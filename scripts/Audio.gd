@@ -1,5 +1,5 @@
 extends Node
 
-func play(name):
-	$Music.stream = load("res://assets/audio/music/" + name + ".mp3")
+func play_song(name):
+	$Music.stream = load("res://assets/audio/music/" + name + ".ogg")
 	$Music.play()

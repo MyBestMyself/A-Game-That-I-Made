@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd2r6lmwvkq3h"]
+
+[ext_resource type="Script" path="res://scripts/paper_behavior/individual_paper/falling_paper.gd" id="1_4j2hb"]
+[ext_resource type="Texture2D" uid="uid://dfmolc0u16tgk" path="res://sprites/paper/paper.png" id="2_xwu37"]
+
+[node name="Paper" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_4j2hb")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(2, 2)
+texture = ExtResource("2_xwu37")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_xwu37")
+
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]

@@ -1,8 +1,16 @@
 extends CharacterBody2D
 
 var rng = RandomNumberGenerator.new()
+var versus = preload("res://scenes/world/versus_screen.tscn")
+var paperRain = preload("res://scenes/paper_behavior/paper_rain.tscn")
+var battle = preload("res://scenes/battle/battle.tscn")
+
 var directionQueue = []
 var facingRight = true
+
+func _ready() -> void:
+	Global.battleTransition.connect(battleTransition)
+	Global.startBattle.connect(start_battle)
 
 func _physics_process(delta: float) -> void:
 	var directions = ["up", "down", "left", "right"]
@@ -13,7 +21,7 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_just_released(direction):
 			directionQueue.erase(direction)
 	
-	if not $Dialogue.speaking:
+	if not $Dialogue.speaking and not Global.battling:
 		move_character()
 	
 	if directionQueue.size() == 0:
@@ -60,3 +68,28 @@ func walk() -> void:
 	else:
 		$Sprite.rotation_degrees = rng.randf_range(0.5, 7.5)
 		$Shadow.rotation_degrees = $Sprite.rotation_degrees
+
+var bosses = ["Ellie"]
+func battleTransition():
+	Global.battling = true
+	if Dialogue.currentSpeaker in bosses:
+		add_child(versus.instantiate())
+	Audio.play_song("Boss")
+	add_child(paperRain.instantiate())
+	load_battle_background()
+
+func start_battle():
+	$Sprite.hide()
+	$Shadow.hide()
+	
+	#Load the background, then reparent to the battle scene to prevent lag
+	add_child(battle.instantiate())
+	$PaperBackground.show() 
+	$PaperBackground.reparent($Battle)
+
+
+var paper_rise = preload("res://scenes/paper_behavior/paper_rise.tscn")
+var paper_wave = preload("res://scenes/paper_behavior/paper_wave.tscn")
+func load_battle_background():
+	$PaperBackground.add_child(paper_rise.instantiate())
+	$PaperBackground.add_child(paper_wave.instantiate())

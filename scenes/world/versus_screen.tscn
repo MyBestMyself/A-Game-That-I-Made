@@ -1,0 +1,193 @@
+[gd_scene load_steps=11 format=3 uid="uid://ce0onwv8x6vl0"]
+
+[ext_resource type="Script" path="res://scripts/world/versus_screen.gd" id="1_0ichi"]
+[ext_resource type="Texture2D" uid="uid://bxpnd8b0rw4up" path="res://sprites/paper/cardboardSmall.png" id="2_hpma5"]
+[ext_resource type="Texture2D" uid="uid://lfxqipqthqpk" path="res://sprites/characters/YouBig.png" id="3_w3qyr"]
+[ext_resource type="Texture2D" uid="uid://b6l2glvtcwls3" path="res://sprites/paper/stamp.png" id="4_gb538"]
+[ext_resource type="FontVariation" uid="uid://b5hfv1r25ku65" path="res://assets/fonts/MyBestFont.tres" id="5_te8tu"]
+[ext_resource type="Texture2D" uid="uid://b84mifwa1fs3n" path="res://sprites/paper/versus.png" id="6_v7w0x"]
+[ext_resource type="Texture2D" uid="uid://d0yf3evumquqp" path="res://sprites/characters/EllieBig.png" id="7_fg1sd"]
+
+[sub_resource type="Animation" id="Animation_gb8cs"]
+resource_name = "Popup"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector2(5, 5), Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3f7me"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7v3cw"]
+_data = {
+"Popup": SubResource("Animation_gb8cs"),
+"RESET": SubResource("Animation_3f7me")
+}
+
+[node name="Versus" type="Node2D"]
+texture_filter = 1
+scale = Vector2(5, 5)
+script = ExtResource("1_0ichi")
+metadata/_edit_group_ = true
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(2, 2)
+texture = ExtResource("2_hpma5")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("2_hpma5")
+
+[node name="YouShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(-55, 9)
+scale = Vector2(1, 1)
+texture = ExtResource("3_w3qyr")
+
+[node name="You" type="Sprite2D" parent="."]
+position = Vector2(-56, 8)
+scale = Vector2(1, 1)
+texture = ExtResource("3_w3qyr")
+
+[node name="YouNameShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(-55, -37)
+scale = Vector2(1, 1)
+texture = ExtResource("4_gb538")
+hframes = 8
+
+[node name="YouName" type="Sprite2D" parent="."]
+position = Vector2(-56, -38)
+scale = Vector2(1, 1)
+texture = ExtResource("4_gb538")
+hframes = 8
+
+[node name="Label" type="Label" parent="YouName"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -8.0
+offset_right = -32.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_te8tu")
+text = "You"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+max_lines_visible = 2
+
+[node name="VersusShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(1, 1)
+scale = Vector2(1, 1)
+texture = ExtResource("6_v7w0x")
+
+[node name="Versus" type="Sprite2D" parent="."]
+scale = Vector2(1, 1)
+texture = ExtResource("6_v7w0x")
+
+[node name="BossShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(57, -7)
+scale = Vector2(1, 1)
+texture = ExtResource("7_fg1sd")
+
+[node name="Boss" type="Sprite2D" parent="."]
+position = Vector2(56, -8)
+scale = Vector2(1, 1)
+texture = ExtResource("7_fg1sd")
+
+[node name="BossNameShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(57, 39)
+scale = Vector2(1, 1)
+texture = ExtResource("4_gb538")
+hframes = 8
+
+[node name="BossName" type="Sprite2D" parent="."]
+position = Vector2(56, 38)
+scale = Vector2(1, 1)
+texture = ExtResource("4_gb538")
+hframes = 8
+
+[node name="Label" type="Label" parent="BossName"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -8.0
+offset_right = -32.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_te8tu")
+text = "Boss
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+max_lines_visible = 2
+
+[node name="Animate" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7v3cw")
+}
+autoplay = "Popup"
+
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]

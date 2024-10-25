@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpirwfgkqj0ud"]
+
+[ext_resource type="Script" path="res://scripts/paper_behavior/paper_rain.gd" id="1_nghtg"]
+
+[node name="PaperRain" type="Node2D"]
+z_index = 2
+position = Vector2(128, -288)
+script = ExtResource("1_nghtg")
+
+[node name="InitialTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="BattleTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+
+[node name="KillTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="InitialTimer" to="." method="_on_initial_timer_timeout"]
+[connection signal="timeout" from="BattleTimer" to="." method="_on_battle_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]

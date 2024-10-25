@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7g3nayi5rtel"]
+
+[ext_resource type="Script" path="res://scripts/paper_behavior/paper_rise.gd" id="1_dxvmw"]
+
+[node name="PaperRise" type="Node2D"]
+z_index = 1
+position = Vector2(128, 296)
+script = ExtResource("1_dxvmw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

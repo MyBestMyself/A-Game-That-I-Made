@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbrgv8fv4rwqe"]
+
+[ext_resource type="Script" path="res://scripts/battle/button.gd" id="1_fc3no"]
+[ext_resource type="Texture2D" uid="uid://b6l2glvtcwls3" path="res://sprites/paper/stamp.png" id="1_s1u3u"]
+[ext_resource type="FontVariation" uid="uid://b5hfv1r25ku65" path="res://assets/fonts/MyBestFont.tres" id="3_ihrju"]
+
+[node name="Button" type="Node2D"]
+script = ExtResource("1_fc3no")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+texture_filter = 1
+position = Vector2(1, 1)
+texture = ExtResource("1_s1u3u")
+hframes = 8
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_s1u3u")
+hframes = 8
+
+[node name="Label" type="Label" parent="Sprite"]
+offset_left = -32.0
+offset_top = -5.0
+offset_right = 32.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ihrju")
+theme_override_font_sizes/font_size = 16
+text = "Text
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 1

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://sfoj4qltwcao"]
+
+[ext_resource type="Script" path="res://scripts/paper_behavior/paper_wave.gd" id="1_rpt0k"]
+
+[node name="PaperWave" type="Node2D"]
+z_index = 1
+position = Vector2(-128, 208)
+script = ExtResource("1_rpt0k")
+
+[node name="StaggerTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="StaggerTimer" to="." method="_on_stagger_timer_timeout"]

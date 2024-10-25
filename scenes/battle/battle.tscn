@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnk8yppvr75cm"]
+
+[ext_resource type="Texture2D" uid="uid://bvu3lkrwoj2o3" path="res://sprites/world/decoration/Table.png" id="1_ukbn4"]
+[ext_resource type="PackedScene" uid="uid://bqyem3r7pokm5" path="res://scenes/battle/trainer.tscn" id="2_5crn4"]
+[ext_resource type="PackedScene" uid="uid://b06nor2rmvpx6" path="res://scenes/battle/textbox.tscn" id="2_5nmul"]
+[ext_resource type="PackedScene" uid="uid://s7h7q4p51bly" path="res://scenes/battle/drawing.tscn" id="2_yw6be"]
+[ext_resource type="PackedScene" uid="uid://de4bu3cs26upr" path="res://scenes/battle/info.tscn" id="3_wrvpv"]
+
+[node name="Battle" type="Node2D"]
+texture_filter = 1
+
+[node name="Layayay" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Table" type="Sprite2D" parent="Layayay"]
+z_index = -2
+texture_repeat = 2
+texture = ExtResource("1_ukbn4")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 192)
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="Friend" parent="." groups=["friend"] instance=ExtResource("2_yw6be")]
+position = Vector2(-80, 0)
+metadata/_edit_lock_ = true
+
+[node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("2_yw6be")]
+position = Vector2(80, -48)
+metadata/_edit_lock_ = true
+
+[node name="FriendInfo" parent="." groups=["friend"] instance=ExtResource("3_wrvpv")]
+position = Vector2(-184, -72)
+metadata/_edit_lock_ = true
+
+[node name="EnemyInfo" parent="." groups=["enemy"] instance=ExtResource("3_wrvpv")]
+position = Vector2(184, 24)
+
+[node name="Trainer" parent="." instance=ExtResource("2_5crn4")]
+
+[node name="Textbox" parent="." instance=ExtResource("2_5nmul")]

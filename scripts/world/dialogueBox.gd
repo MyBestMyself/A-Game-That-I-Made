@@ -24,10 +24,18 @@ func playDialogue():
 		if Dialogue.text[Dialogue.currentSpeaker][Dialogue.textIndex] in keywords:
 			speaking = false
 			$Animate.play("slideOut")
+			keyword_behavior(Dialogue.text[Dialogue.currentSpeaker][Dialogue.textIndex])
 		else:
 			add_child(text.instantiate())
 
+func keyword_behavior(keyword):
+	match keyword:
+		"START BATTLE":
+			Global.battleTransition.emit()
+
 func setup():
+	rng.randomize()
+	
 	$FirstTextStamp.frame = rng.randi_range(0,3)
 	$FirstTextStampShadow.frame = $FirstTextStamp.frame
 	

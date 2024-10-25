@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df7bf0cptjyaf"
-path="res://.godot/imported/fullVoid.png-768e35bb9873e36c5f24768e525242e6.ctex"
+uid="uid://w46so8m010uq"
+path="res://.godot/imported/infoBox.png-6684b394e49295091f06922fd8d7328b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/battle/fullVoid.png"
-dest_files=["res://.godot/imported/fullVoid.png-768e35bb9873e36c5f24768e525242e6.ctex"]
+source_file="res://sprites/paper/infoBox.png"
+dest_files=["res://.godot/imported/infoBox.png-6684b394e49295091f06922fd8d7328b.ctex"]
 
 [params]
 

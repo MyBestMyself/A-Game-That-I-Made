@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://corex0upkwfj3"
-path="res://.godot/imported/darkVoid.png-1357cfd37cccce35ca665616d2209d92.ctex"
+uid="uid://dhpgrnqjuqdk1"
+path="res://.godot/imported/Geobro.png-1deb5fe07f5702144ccccadabe6ed640.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/battle/darkVoid.png"
-dest_files=["res://.godot/imported/darkVoid.png-1357cfd37cccce35ca665616d2209d92.ctex"]
+source_file="res://sprites/friends/Geobro.png"
+dest_files=["res://.godot/imported/Geobro.png-1deb5fe07f5702144ccccadabe6ed640.ctex"]
 
 [params]
 

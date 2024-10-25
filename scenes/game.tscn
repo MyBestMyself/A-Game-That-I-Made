@@ -10,8 +10,14 @@ texture_filter = 1
 [node name="World" parent="." instance=ExtResource("1_flew5")]
 
 [node name="You" parent="World" instance=ExtResource("2_djjsp")]
+slide_on_ceiling = false
 
 [node name="Dialogue" parent="World/You" instance=ExtResource("3_ofc3j")]
 
 [node name="Camera2D" type="Camera2D" parent="World/You"]
 position_smoothing_enabled = true
+
+[node name="PaperBackground" type="Node2D" parent="World/You"]
+visible = false
+z_index = -2
+position = Vector2(-128, -96)

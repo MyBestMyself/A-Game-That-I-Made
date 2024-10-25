@@ -1,0 +1,194 @@
+[gd_scene load_steps=8 format=3 uid="uid://b06nor2rmvpx6"]
+
+[ext_resource type="Script" path="res://scripts/battle/textbox.gd" id="1_3cma4"]
+[ext_resource type="Texture2D" uid="uid://b3xc0j0y51jnf" path="res://sprites/paper/textBox.png" id="2_lsojd"]
+[ext_resource type="PackedScene" uid="uid://bbrgv8fv4rwqe" path="res://scenes/battle/button.tscn" id="3_a4h53"]
+
+[sub_resource type="Animation" id="Animation_d1pr1"]
+resource_name = "BattleIntro"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.1, 1.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 128), Vector2(0, 72)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"ready_for_intro"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wbmfh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 128)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Actions/Moves:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(26, 37)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Actions/Stuff:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(94, 37)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Actions/FRIENDS:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(26, 60)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Actions/Run:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(96, 60)]
+}
+
+[sub_resource type="Animation" id="Animation_1ipjv"]
+resource_name = "Actions"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actions/Moves:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(26, 37), Vector2(26, -11)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Actions/Stuff:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.6),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(94, 37), Vector2(94, -11)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Actions/FRIENDS:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 0.7),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(26, 60), Vector2(26, 12)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Actions/Run:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6, 0.8),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(96, 60), Vector2(96, 12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3xcb6"]
+_data = {
+"Actions": SubResource("Animation_1ipjv"),
+"BattleIntro": SubResource("Animation_d1pr1"),
+"RESET": SubResource("Animation_wbmfh")
+}
+
+[node name="Textbox" type="Node2D"]
+texture_filter = 1
+position = Vector2(0, 128)
+script = ExtResource("1_3cma4")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(2, 2)
+texture = ExtResource("2_lsojd")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_lsojd")
+
+[node name="BattleText" type="Node2D" parent="."]
+
+[node name="Actions" type="Node2D" parent="."]
+
+[node name="Moves" parent="Actions" instance=ExtResource("3_a4h53")]
+position = Vector2(26, 37)
+
+[node name="Stuff" parent="Actions" instance=ExtResource("3_a4h53")]
+position = Vector2(94, 37)
+
+[node name="FRIENDS" parent="Actions" instance=ExtResource("3_a4h53")]
+position = Vector2(26, 60)
+
+[node name="Run" parent="Actions" instance=ExtResource("3_a4h53")]
+position = Vector2(96, 60)
+
+[node name="Animate" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3xcb6")
+}
+autoplay = "BattleIntro"

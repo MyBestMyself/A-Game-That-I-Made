@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ssfo01p357rq"
-path="res://.godot/imported/lightVoid.png-9a9581a342fdd6533c6938c0b5df2455.ctex"
+uid="uid://bsg2j1t4kqtb6"
+path="res://.godot/imported/The Volatile.png-d6d481d63f080523cb380709c1d54954.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/battle/lightVoid.png"
-dest_files=["res://.godot/imported/lightVoid.png-9a9581a342fdd6533c6938c0b5df2455.ctex"]
+source_file="res://sprites/friends/The Volatile.png"
+dest_files=["res://.godot/imported/The Volatile.png-d6d481d63f080523cb380709c1d54954.ctex"]
 
 [params]
 
