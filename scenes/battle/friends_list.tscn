@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://o32dl3i3eexu"]
+
+[ext_resource type="Script" path="res://scripts/battle/friends_list.gd" id="1_kevij"]
+[ext_resource type="Texture2D" uid="uid://cdh1fo6c8lkn2" path="res://sprites/paper/cardboardHalf.png" id="2_1g5mb"]
+
+[node name="FriendsList" type="Node2D"]
+texture_filter = 1
+position = Vector2(-80, 96)
+script = ExtResource("1_kevij")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(2, 2)
+texture = ExtResource("2_1g5mb")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("2_1g5mb")
+
+[node name="Friends" type="Node2D" parent="."]

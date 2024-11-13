@@ -3,7 +3,6 @@ extends CharacterBody2D
 var rng = RandomNumberGenerator.new()
 var versus = preload("res://scenes/world/versus_screen.tscn")
 var paperRain = preload("res://scenes/paper_behavior/paper_rain.tscn")
-var battle = preload("res://scenes/battle/battle.tscn")
 
 var directionQueue = []
 var facingRight = true
@@ -11,6 +10,7 @@ var facingRight = true
 func _ready() -> void:
 	Global.battleTransition.connect(battleTransition)
 	Global.startBattle.connect(start_battle)
+	Global.run.connect(run)
 
 func _physics_process(delta: float) -> void:
 	var directions = ["up", "down", "left", "right"]
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_just_released(direction):
 			directionQueue.erase(direction)
 	
-	if not $Dialogue.speaking and not Global.battling:
+	if not Global.battling:
 		move_character()
 	
 	if directionQueue.size() == 0:
@@ -31,29 +31,29 @@ func move_character() -> void:
 	if directionQueue.size() == 0:
 		return
 	
-	var dir = directionQueue[0]
+	var direction = directionQueue[0]
 	var move_vector = Vector2.ZERO
 	var is_moving = false
 
-	match dir:
+	match direction:
 		"right":
 			move_vector.x = 1
-			is_moving = Input.is_action_pressed(dir)
+			is_moving = Input.is_action_pressed(direction)
 			if !facingRight:
 				facingRight = true
 				$Flip.play_backwards("flip")
 		"left":
 			move_vector.x = -1
-			is_moving = Input.is_action_pressed(dir)
+			is_moving = Input.is_action_pressed(direction)
 			if facingRight:
 				facingRight = false
 				$Flip.play("flip")
 		"down":
 			move_vector.y = 1
-			is_moving = Input.is_action_pressed(dir)
+			is_moving = Input.is_action_pressed(direction)
 		"up":
 			move_vector.y = -1
-			is_moving = Input.is_action_pressed(dir)
+			is_moving = Input.is_action_pressed(direction)
 
 	if is_moving:
 		move_and_collide(move_vector)
@@ -74,22 +74,32 @@ func battleTransition():
 	Global.battling = true
 	if Dialogue.currentSpeaker in bosses:
 		add_child(versus.instantiate())
-	Audio.play_song("Boss")
+	Audio.play_song("Politely, Walk Off the Boat")
 	add_child(paperRain.instantiate())
 	load_battle_background()
 
 func start_battle():
 	$Sprite.hide()
 	$Shadow.hide()
-	
 	#Load the background, then reparent to the battle scene to prevent lag
-	add_child(battle.instantiate())
 	$PaperBackground.show() 
 	$PaperBackground.reparent($Battle)
 
+func run():
+	Global.battling = false
+	
+	$Sprite.show()
+	$Shadow.show()
+	$Battle/PaperBackground.reparent(self)
+	
+	kill_battle_background()
 
 var paper_rise = preload("res://scenes/paper_behavior/paper_rise.tscn")
 var paper_wave = preload("res://scenes/paper_behavior/paper_wave.tscn")
 func load_battle_background():
 	$PaperBackground.add_child(paper_rise.instantiate())
 	$PaperBackground.add_child(paper_wave.instantiate())
+
+func kill_battle_background():
+	for x in $PaperBackground.get_children():
+		x.queue_free()

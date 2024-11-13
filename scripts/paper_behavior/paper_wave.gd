@@ -3,7 +3,7 @@ extends Node2D
 @export var quantity = 36
 var paperHelper = 0
 
-var paper = load("res://scenes/paper_behavior/individual_paper/spin_paper.tscn")
+var paper = preload("res://scenes/paper_behavior/individual_paper/spin_paper.tscn")
 
 
 func _on_stagger_timer_timeout() -> void:

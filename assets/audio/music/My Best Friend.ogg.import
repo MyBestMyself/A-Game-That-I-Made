@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dioi7s65t37s"
+path="res://.godot/imported/My Best Friend.ogg-d6f5679ac9304f1ba196c8b7cb276e16.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/My Best Friend.ogg"
+dest_files=["res://.godot/imported/My Best Friend.ogg-d6f5679ac9304f1ba196c8b7cb276e16.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=21.6
+bpm=0
+beat_count=0
+bar_beats=4

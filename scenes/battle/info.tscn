@@ -1,66 +1,145 @@
-[gd_scene load_steps=14 format=3 uid="uid://de4bu3cs26upr"]
+[gd_scene load_steps=20 format=3 uid="uid://de4bu3cs26upr"]
 
 [ext_resource type="Script" path="res://scripts/battle/info.gd" id="1_2xuuu"]
 [ext_resource type="Texture2D" uid="uid://w46so8m010uq" path="res://sprites/paper/infoBox.png" id="2_bvqy3"]
 [ext_resource type="Texture2D" uid="uid://b6l2glvtcwls3" path="res://sprites/paper/stamp.png" id="3_763k8"]
-[ext_resource type="FontVariation" uid="uid://b5hfv1r25ku65" path="res://assets/fonts/MyBestFont.tres" id="4_ki7h5"]
+[ext_resource type="FontFile" uid="uid://b0ex4t4yscccb" path="res://assets/fonts/Mybestfont-Regular.ttf" id="4_l7cnj"]
 [ext_resource type="Texture2D" uid="uid://b6nw4a01emysq" path="res://sprites/paper/stampShort.png" id="5_qix3c"]
-[ext_resource type="Texture2D" uid="uid://blyt0lnhtmnfu" path="res://sprites/battle/Health1.png" id="6_enthy"]
+[ext_resource type="PackedScene" uid="uid://vuypiuqldbhc" path="res://scenes/battle/healthbar.tscn" id="6_b3won"]
+[ext_resource type="Texture2D" uid="uid://b6haxnsf1ln0m" path="res://sprites/paper/stampStub.png" id="7_a4526"]
 
-[sub_resource type="Animation" id="Animation_l4x0v"]
-resource_name = "SetupEnemy"
-length = 0.1
+[sub_resource type="FontVariation" id="FontVariation_2ipuw"]
+base_font = ExtResource("4_l7cnj")
+spacing_glyph = -1
+
+[sub_resource type="Animation" id="Animation_v587i"]
+resource_name = "ChangeHealth"
+length = 1.6
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Name:position")
+tracks/0/path = NodePath("HealthStub:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1, 1.1, 1.6),
+"transitions": PackedFloat32Array(0.5, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(25, 18), Vector2(-57, 18), Vector2(-57, 18), Vector2(25, 18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthStubShadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1, 1.1, 1.6),
+"transitions": PackedFloat32Array(0.5, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(26, 19), Vector2(-56, 19), Vector2(-56, 19), Vector2(26, 19)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_new_health"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vmu65"]
+resource_name = "EnemyIntro"
+length = 1.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8, 1.3),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(184, 24), Vector2(88, 24)]
+}
+
+[sub_resource type="Animation" id="Animation_rkgtd"]
+resource_name = "EnemyPopup"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(184, 24), Vector2(88, 24)]
+}
+
+[sub_resource type="Animation" id="Animation_4ogiw"]
+resource_name = "FriendIntro"
+length = 1.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8, 1.3),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(-184, -72), Vector2(-88, -72)]
+}
+
+[sub_resource type="Animation" id="Animation_xy0bq"]
+resource_name = "FriendPopup"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(-184, -72), Vector2(-88, -72)]
+}
+
+[sub_resource type="Animation" id="Animation_q761i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-7.5, -6.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NameShadow:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-6.5, -5.5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Level:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(35, -6)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("LevelShadow:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(36, -5)]
+"values": [Vector2(184, 24)]
 }
 
 [sub_resource type="Animation" id="Animation_ibuiu"]
-resource_name = "SetupFriend"
+resource_name = "SetupEnemy"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -110,44 +189,134 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(29, -5)]
 }
-
-[sub_resource type="Animation" id="Animation_vmu65"]
-resource_name = "EnemyIntro"
-length = 1.8
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(1.3, 1.8),
-"transitions": PackedFloat32Array(0.5, 1),
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Healthbar:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(184, 24), Vector2(88, 24)]
+"values": [Vector2(-5, 9)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HealthStub:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HealthStubShadow:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_4ogiw"]
-resource_name = "FriendIntro"
-length = 1.8
-step = 0.1
+[sub_resource type="Animation" id="Animation_l4x0v"]
+resource_name = "SetupFriends"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Name:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1.3, 1.8),
-"transitions": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-184, -72), Vector2(-88, -72)]
+"values": [Vector2(-7.5, -6.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NameShadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-6.5, -5.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Level:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(35, -6)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelShadow:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(36, -5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Healthbar:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 9)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HealthStub:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HealthStubShadow:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_xy0bq"]
-resource_name = "FriendPopup"
-length = 0.5
+[sub_resource type="Animation" id="Animation_ubf8q"]
+resource_name = "SlideOutEnemy"
+length = 1.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -156,15 +325,15 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(-2, 1),
 "update": 0,
-"values": [Vector2(-184, -72), Vector2(-88, -72)]
+"values": [Vector2(88, 24), Vector2(184, 24)]
 }
 
-[sub_resource type="Animation" id="Animation_rkgtd"]
-resource_name = "EnemyPopup"
-length = 0.5
+[sub_resource type="Animation" id="Animation_muu4l"]
+resource_name = "SlideOutFriend"
+length = 1.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -173,25 +342,29 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(0.5, 1),
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(-2, 1),
 "update": 0,
-"values": [Vector2(184, 24), Vector2(88, 24)]
+"values": [Vector2(-88, -72), Vector2(-184, -72)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_em1xs"]
 _data = {
+"ChangeHealth": SubResource("Animation_v587i"),
 "EnemyIntro": SubResource("Animation_vmu65"),
 "EnemyPopup": SubResource("Animation_rkgtd"),
 "FriendIntro": SubResource("Animation_4ogiw"),
 "FriendPopup": SubResource("Animation_xy0bq"),
-"SetupEnemy": SubResource("Animation_l4x0v"),
-"SetupFriend": SubResource("Animation_ibuiu")
+"RESET": SubResource("Animation_q761i"),
+"SetupEnemy": SubResource("Animation_ibuiu"),
+"SetupFriends": SubResource("Animation_l4x0v"),
+"SlideOutEnemy": SubResource("Animation_ubf8q"),
+"SlideOutFriend": SubResource("Animation_muu4l")
 }
 
 [node name="Info" type="Node2D"]
 texture_filter = 1
-position = Vector2(88, 24)
+position = Vector2(184, 24)
 script = ExtResource("1_2xuuu")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -207,13 +380,13 @@ hframes = 4
 [node name="NameShadow" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.196078)
 texture_filter = 1
-position = Vector2(-13.5, -5.5)
+position = Vector2(-6.5, -5.5)
 texture = ExtResource("3_763k8")
 hframes = 8
 
 [node name="Name" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-14.5, -6.5)
+position = Vector2(-7.5, -6.5)
 texture = ExtResource("3_763k8")
 hframes = 8
 
@@ -223,10 +396,9 @@ offset_top = -5.0
 offset_right = 32.0
 offset_bottom = 8.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_ki7h5")
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
 theme_override_font_sizes/font_size = 16
-text = "Geobro
-"
+text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -235,27 +407,27 @@ max_lines_visible = 1
 [node name="LevelShadow" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.196078)
 texture_filter = 1
-position = Vector2(29, -5)
+position = Vector2(36, -5)
 texture = ExtResource("5_qix3c")
 hframes = 4
 
 [node name="Level" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(28, -6)
+position = Vector2(35, -6)
 texture = ExtResource("5_qix3c")
 hframes = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Level"]
-offset_left = -8.0
+offset_left = -9.0
 offset_top = -4.0
-offset_right = 14.0
+offset_right = 9.0
 offset_bottom = 9.0
 theme_override_constants/separation = 0
 
 [node name="Prefix" type="Label" parent="Level/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
-theme_override_fonts/font = ExtResource("4_ki7h5")
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
 theme_override_font_sizes/font_size = 8
 text = "Lv"
 horizontal_alignment = 1
@@ -265,16 +437,42 @@ max_lines_visible = 1
 [node name="Num" type="Label" parent="Level/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
-theme_override_fonts/font = ExtResource("4_ki7h5")
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
 theme_override_font_sizes/font_size = 10
 text = "100"
-horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
 
-[node name="Health" type="Sprite2D" parent="."]
-position = Vector2(0, 8)
-texture = ExtResource("6_enthy")
+[node name="Healthbar" parent="." instance=ExtResource("6_b3won")]
+z_index = 1
+position = Vector2(2, 9)
+
+[node name="HealthStubShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+z_index = 1
+position = Vector2(26, 19)
+texture = ExtResource("7_a4526")
+hframes = 4
+
+[node name="HealthStub" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(25, 18)
+texture = ExtResource("7_a4526")
+hframes = 4
+
+[node name="Num" type="Label" parent="HealthStub"]
+offset_left = -9.0
+offset_top = -2.0
+offset_right = 9.0
+offset_bottom = 5.0
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 8
+text = "Health
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 1
 
 [node name="Animate" type="AnimationPlayer" parent="."]
 libraries = {

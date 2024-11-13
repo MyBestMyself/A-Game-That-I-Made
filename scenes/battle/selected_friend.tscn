@@ -1,0 +1,300 @@
+[gd_scene load_steps=19 format=3 uid="uid://rwhp81gr4gdf"]
+
+[ext_resource type="Texture2D" uid="uid://cqgf63lpvem7j" path="res://sprites/paper/stickyNote.png" id="1_is1r2"]
+[ext_resource type="Script" path="res://scripts/battle/selected_friend.gd" id="1_jjc5d"]
+[ext_resource type="Texture2D" uid="uid://b6l2glvtcwls3" path="res://sprites/paper/stamp.png" id="2_hrkuh"]
+[ext_resource type="Texture2D" uid="uid://dhpgrnqjuqdk1" path="res://sprites/friends/Geobro.png" id="3_ogaga"]
+[ext_resource type="FontFile" uid="uid://b0ex4t4yscccb" path="res://assets/fonts/Mybestfont-Regular.ttf" id="3_xok8j"]
+[ext_resource type="Texture2D" uid="uid://b6nw4a01emysq" path="res://sprites/paper/stampShort.png" id="4_6kle2"]
+[ext_resource type="Texture2D" uid="uid://t144yi3whybk" path="res://sprites/battle/Health1.png" id="7_5krcb"]
+[ext_resource type="Texture2D" uid="uid://b6haxnsf1ln0m" path="res://sprites/paper/stampStub.png" id="8_ths1i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dujp"]
+size = Vector2(36, 36)
+
+[sub_resource type="FontVariation" id="FontVariation_fx0tr"]
+base_font = ExtResource("3_xok8j")
+spacing_glyph = -1
+
+[sub_resource type="FontVariation" id="FontVariation_n5y0i"]
+base_font = ExtResource("3_xok8j")
+spacing_glyph = -1
+
+[sub_resource type="FontVariation" id="FontVariation_brcmj"]
+base_font = ExtResource("3_xok8j")
+spacing_glyph = -1
+
+[sub_resource type="Animation" id="Animation_sumxw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sticky:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_6d1oo"]
+resource_name = "Scale"
+length = 0.1
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sticky:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.6, 0.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.6, 0.6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ojm4"]
+_data = {
+"RESET": SubResource("Animation_sumxw"),
+"Scale": SubResource("Animation_6d1oo")
+}
+
+[sub_resource type="Animation" id="Animation_eju62"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sticky:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ak0k3"]
+resource_name = "wobble"
+length = 1.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sticky:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2),
+"update": 0,
+"values": [0.0, 0.174533, 0.0, -0.174533]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pvtxa"]
+_data = {
+"RESET": SubResource("Animation_eju62"),
+"wobble": SubResource("Animation_ak0k3")
+}
+
+[node name="SelectedFriend" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_jjc5d")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(-43, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_is1r2")
+hframes = 6
+
+[node name="Sticky" type="Sprite2D" parent="."]
+position = Vector2(-44, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_is1r2")
+hframes = 6
+
+[node name="Drawing" type="Sprite2D" parent="Sticky"]
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("3_ogaga")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(-44, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.25, -0.25)
+shape = SubResource("RectangleShape2D_8dujp")
+
+[node name="NameShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+texture_filter = 1
+position = Vector2(9, -8.5)
+texture = ExtResource("2_hrkuh")
+hframes = 8
+
+[node name="Name" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(8, -9.5)
+texture = ExtResource("2_hrkuh")
+hframes = 8
+
+[node name="Label" type="Label" parent="Name"]
+offset_left = -32.0
+offset_top = -5.0
+offset_right = 32.0
+offset_bottom = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_fx0tr")
+theme_override_font_sizes/font_size = 16
+text = "Name
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 1
+
+[node name="LevelShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+texture_filter = 1
+position = Vector2(52, -8.5)
+texture = ExtResource("4_6kle2")
+hframes = 4
+
+[node name="Level" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(51, -9.5)
+texture = ExtResource("4_6kle2")
+hframes = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Level"]
+offset_left = -9.0
+offset_top = -4.0
+offset_right = 9.0
+offset_bottom = 9.0
+theme_override_constants/separation = 0
+
+[node name="Prefix" type="Label" parent="Level/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = SubResource("FontVariation_n5y0i")
+theme_override_font_sizes/font_size = 8
+text = "Lv"
+vertical_alignment = 1
+max_lines_visible = 1
+
+[node name="Num" type="Label" parent="Level/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = SubResource("FontVariation_n5y0i")
+theme_override_font_sizes/font_size = 10
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 1
+
+[node name="HealthbarShadow" type="TextureProgressBar" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+offset_left = -23.0
+offset_top = 2.0
+offset_right = 59.0
+offset_bottom = 10.0
+value = 100.0
+texture_progress = ExtResource("7_5krcb")
+
+[node name="Healthbar" type="TextureProgressBar" parent="."]
+offset_left = -24.0
+offset_top = 1.0
+offset_right = 58.0
+offset_bottom = 9.0
+value = 100.0
+texture_progress = ExtResource("7_5krcb")
+
+[node name="HealthStubShadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(41, 16)
+texture = ExtResource("8_ths1i")
+hframes = 4
+
+[node name="HealthStub" type="Sprite2D" parent="."]
+position = Vector2(40, 15)
+texture = ExtResource("8_ths1i")
+hframes = 4
+
+[node name="Num" type="Label" parent="HealthStub"]
+offset_left = -9.0
+offset_top = -2.0
+offset_right = 9.0
+offset_bottom = 5.0
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_fonts/font = SubResource("FontVariation_brcmj")
+theme_override_font_sizes/font_size = 8
+text = "Health
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+max_lines_visible = 1
+
+[node name="Scale" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2ojm4")
+}
+
+[node name="Wobble" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pvtxa")
+}
+
+[connection signal="mouse_entered" from="Hitbox" to="." method="_on_hitbox_mouse_entered"]
+[connection signal="mouse_exited" from="Hitbox" to="." method="_on_hitbox_mouse_exited"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6haxnsf1ln0m"
-path="res://.godot/imported/stampStub.png-dbaec0228ef3abac5f8d2815e4b8f2ec.ctex"
+uid="uid://l2wmoysju1l2"
+path="res://.godot/imported/whiteness.png-69986da6749444b7347472a616d65f3e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/paper/stampStub.png"
-dest_files=["res://.godot/imported/stampStub.png-dbaec0228ef3abac5f8d2815e4b8f2ec.ctex"]
+source_file="res://sprites/battle/whiteness.png"
+dest_files=["res://.godot/imported/whiteness.png-69986da6749444b7347472a616d65f3e.ctex"]
 
 [params]
 

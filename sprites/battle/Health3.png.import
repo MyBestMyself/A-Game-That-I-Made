@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6haxnsf1ln0m"
-path="res://.godot/imported/stampStub.png-dbaec0228ef3abac5f8d2815e4b8f2ec.ctex"
+uid="uid://bnu2jhv7rgt1p"
+path="res://.godot/imported/Health3.png-17d6d91519ab2d670d934d7f3e290b67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/paper/stampStub.png"
-dest_files=["res://.godot/imported/stampStub.png-dbaec0228ef3abac5f8d2815e4b8f2ec.ctex"]
+source_file="res://sprites/battle/Health3.png"
+dest_files=["res://.godot/imported/Health3.png-17d6d91519ab2d670d934d7f3e290b67.ctex"]
 
 [params]
 

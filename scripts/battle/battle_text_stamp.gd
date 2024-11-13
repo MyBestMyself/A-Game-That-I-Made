@@ -28,11 +28,11 @@ func setup():
 	#Resize text
 	resize_text($Offset/Sprite/Label)
 
-func resize_text(label):
+func resize_text(label, limit = 2):
 	var fontSize = 16
 	label.add_theme_font_size_override("font_size", fontSize)
 	
-	while label.get_line_count() > 2:
+	while label.get_line_count() > limit:
 		fontSize -= 1
 		label.add_theme_font_size_override("font_size", fontSize)
 

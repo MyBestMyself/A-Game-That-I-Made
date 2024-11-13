@@ -2,7 +2,11 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 
-func _ready() -> void:
+func _ready():
+	Global.startBattle.connect(start_battle)
+	Global.run.connect(run)
+
+func start_battle() -> void:
 	Global.hideTrainer.connect(slide_out)
 	
 	setup()
@@ -15,3 +19,6 @@ func setup():
 
 func slide_out():
 	$Animate.play("SlideOut")
+
+func run():
+	$Animate.play("RESET")

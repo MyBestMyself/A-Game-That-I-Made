@@ -2,7 +2,7 @@ extends Node2D
 
 @export var quantity = 100
 
-var paper = load("res://scenes/paper_behavior/individual_paper/falling_paper.tscn")
+var paper = preload("res://scenes/paper_behavior/individual_paper/falling_paper.tscn")
 
 func _on_initial_timer_timeout() -> void:
 	$Timer.start()
@@ -20,6 +20,7 @@ func _on_timer_timeout() -> void:
 		$BattleTimer.start()
 
 func _on_battle_timer_timeout() -> void:
+	Data.setup_battle()
 	Global.startBattle.emit()
 
 func _on_kill_timer_timeout() -> void:

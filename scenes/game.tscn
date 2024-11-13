@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm8y4n1bytjwv"]
+[gd_scene load_steps=5 format=3 uid="uid://bm8y4n1bytjwv"]
 
 [ext_resource type="PackedScene" uid="uid://cbylv0j7p62wi" path="res://scenes/world/world.tscn" id="1_flew5"]
 [ext_resource type="PackedScene" uid="uid://bhpcs60himhxo" path="res://scenes/world/you.tscn" id="2_djjsp"]
 [ext_resource type="PackedScene" uid="uid://drsm1g2yx3hwl" path="res://scenes/world/dialogue.tscn" id="3_ofc3j"]
+[ext_resource type="PackedScene" uid="uid://cnk8yppvr75cm" path="res://scenes/battle/battle.tscn" id="4_et3k8"]
 
 [node name="Game" type="Node2D"]
 texture_filter = 1
@@ -21,3 +22,5 @@ position_smoothing_enabled = true
 visible = false
 z_index = -2
 position = Vector2(-128, -96)
+
+[node name="Battle" parent="World/You" instance=ExtResource("4_et3k8")]
