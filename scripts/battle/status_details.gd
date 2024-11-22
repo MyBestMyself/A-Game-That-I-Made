@@ -79,7 +79,7 @@ func setup_description(title, condition):
 	$StatusDescription/Sprite/Effect2.text = effect2
 	$StatusDescription/Sprite/Effect2.set("theme_override_colors/font_color", e2Color)
 	
-	$StatusDescription/Sprite/Icon.texture = load("res://sprites/battle/statusConditions/" + Global.selectedStatusCondition['Condition'] + ".png")
+	$StatusDescription/Sprite/Icon.texture = load("res://sprites/battle/statusConditions/" + Global.selectedStatusCondition['Condition'].to_lower() + ".png")
 
 func setup_stats(conditions):
 	var hp = 0
