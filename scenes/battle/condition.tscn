@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://buv7sijuaqu58"]
+[gd_scene load_steps=9 format=3 uid="uid://buv7sijuaqu58"]
 
 [ext_resource type="Script" path="res://scripts/battle/condition.gd" id="1_3lr58"]
 [ext_resource type="Texture2D" uid="uid://bld2lixpswljb" path="res://sprites/paper/stamp12x12.png" id="1_b8j42"]
+[ext_resource type="Texture2D" uid="uid://cefushwrp1idf" path="res://sprites/battle/statusConditions/burnt.png" id="3_sovpf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oiw0w"]
 size = Vector2(12, 12)
@@ -238,6 +239,7 @@ texture = ExtResource("1_b8j42")
 hframes = 4
 
 [node name="Icon" type="Sprite2D" parent="Base"]
+texture = ExtResource("3_sovpf")
 
 [node name="Hitbox" type="Area2D" parent="."]
 input_pickable = false

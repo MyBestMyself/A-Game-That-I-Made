@@ -30,7 +30,7 @@ func setup(team, targetId):
 	$Base.rotation_degrees = rng.randf_range(-15, 15)
 	$Shadow.rotation_degrees = $Base.rotation_degrees
 	
-	icon = Global.field[team][targetId]["Conditions"][condNum]
+	icon = Global.field[team][targetId]["Conditions"][condNum].to_lower()
 	$Base/Icon.texture = load("res://sprites/battle/statusConditions/" + icon + ".png")
 
 func make_unselectable():
