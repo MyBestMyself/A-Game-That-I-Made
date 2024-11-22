@@ -33,6 +33,9 @@ func show_move_details():
 	elif 'Effects' in Global.selectedMove:
 		$MoveStats/Sprite/Other.text = effects_description(Global.selectedMove['Effects'])
 	
+	resize_text($MoveDescription/Sprite/Description, 2)
+	resize_text($MoveStats/Sprite/Other)
+	
 	$Animate.play("MoveDetails")
 	$Animate.seek($Animate.current_animation_position, true)
 
@@ -48,7 +51,7 @@ func effects_description(effects):
 	#Environment - summon
 	var output = ""
 	if 'User' in effects:
-		if 'Accuracy' in effects['User'] and effects['User']['Accuracy'] != null:
+		if 'Accuracy' in effects['User'] and effects['User']['Accuracy'] != 100:
 			output += str(effects['User']['Accuracy']) + "% chance to gain"
 		else:
 			output += "Gain"
@@ -58,30 +61,31 @@ func effects_description(effects):
 			if i < effects['User']['Conditions'].size() - 2:
 				output += ","
 			elif i == effects['User']['Conditions'].size() - 2:
-				output += " and"
+				output += " and/or"
 	
 	if 'User' in effects and 'Target' in effects:
 		output += " "
 	
 	if 'Target' in effects:
-		if 'Accuracy' in effects['Target'] and effects['Target']['Accuracy'] != null:
+		if 'Accuracy' in effects['Target'] and effects['Target']['Accuracy'] != 100:
 			output += str(effects['Target']['Accuracy']) + "% chance to inflict"
 		else:
 			output += "Inflicts"
 		
 		for i in range(effects['Target']['Conditions'].size()):
 			output += " " + effects['Target']['Conditions'][i]
+			
 			if i < effects['Target']['Conditions'].size() - 2:
 				output += ","
 			elif i == effects['Target']['Conditions'].size() - 2:
-				output += " and"
+				output += " and/or"
 	return output
 
-func resize_text(label):
-	var fontSize = 16
+func resize_text(label, limit = 1):
+	var fontSize = 12
 	label.add_theme_font_size_override("font_size", fontSize)
 	
-	while label.get_line_count() > 2:
+	while label.get_line_count() > limit:
 		fontSize -= 1
 		label.add_theme_font_size_override("font_size", fontSize)
 

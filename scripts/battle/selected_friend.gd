@@ -8,9 +8,22 @@ var rng = RandomNumberGenerator.new()
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("confirm") and touchingMouse:
 		Global.selectedMove = Data.friends[id]
-		Global.startNextTurn.emit()
+		
+		if Global.field['Friends'].size() < Global.fieldCapacity:
+			Global.selectedMove = Data.friends[id]
+			Global.currentFriend = id
+			Global.field['Friends'].append(Data.friends[id])
+			Global.resumeBattleAfterDown.emit()
+		else:
+			Global.currentFriend = id
+			Global.field['Friends'].append(Data.friends[id])
+			Global.startNextTurn.emit()
 
 func setup():
+	if Global.currentFriend == id:
+		hide()
+	elif not visible:
+		show()
 	var friend = Data.friends[id]
 	
 	position.y = -78 + (id * 39)
@@ -44,13 +57,35 @@ func setup():
 	$Wobble.pause()
 	
 	$Name/Label.text = friend['Name']
+	
+	var level = friend['Level']
+	var maxHealth = round(friend['Health']['Max'] * (0.05) * level)
+	var currentHealth = round(friend['Health']['Current'] * (0.05) * level)
+	
 	$Level/HBoxContainer/Num.text = str(friend['Level'])
-	$HealthStub/Num.text = str(friend['Health']['Current']) + "/" + str(friend['Health']['Max'])
+	$HealthStub/Num.text = str(currentHealth) + "/" + str(maxHealth)
 	
 	$Sticky/Drawing.texture = load("res://sprites/friends/" + friend['Name'] + ".png")
 	
-	$Healthbar.value = (friend['Health']['Current'] / friend['Health']['Max']) * 100
+	$Healthbar.value = (currentHealth / maxHealth) * 100
 	$HealthbarShadow.value = $Healthbar.value
+	
+	$Hitbox.input_pickable = true
+	$HealthStub.show()
+	$HealthStubShadow.show()
+	$Sticky/X.hide()
+	if currentHealth <= 0:
+		$Hitbox.input_pickable = false
+		$HealthStub.hide()
+		$HealthStubShadow.hide()
+		$Sticky/X.show()
+		
+		num = rng.randf_range(20, 70)
+		
+		$Sticky/X/TopX.rotation_degrees = num
+		$Sticky/X/BottomX.rotation_degrees = num
+		$Sticky/X/TopXShadow.rotation_degrees = num
+		$Sticky/X/BottomXShadow.rotation_degrees = num
 	
 	resize_text($Name/Label, 1)
 

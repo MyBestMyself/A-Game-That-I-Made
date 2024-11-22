@@ -25,10 +25,16 @@ func take_damage(targetId = id):
 			hurt()
 
 func hurt():
+	var level = Global.field[team][id]['Level']
+	
+	var maxHealth = round(Global.field[team][id]['Health']['Max'] * (0.05) * level)
+	var currentHealth = round(Global.field[team][id]['Health']['Current'] * (0.05) * level)
+	
 	if Global.calculatedDamage != null:
-		Global.field[team][id]['Health']['Current'] -= Global.calculatedDamage
-	var maxHealth = Global.field[team][id]['Health']['Max']
-	var currentHealth = Global.field[team][id]['Health']['Current']
+		currentHealth -= Global.calculatedDamage
+		if currentHealth < 0:
+			currentHealth = 0
+		Global.field[team][id]['Health']['Current'] = currentHealth / level  / 0.05
 	
 	var healthPercent = (currentHealth/maxHealth) * 100
 	$Offset/Health.value = healthPercent
@@ -40,8 +46,11 @@ func hurt():
 	$Offset/TransformFakeHealth/Light.position.x = -steps * 0.82
 	$Offset/TransformFakeHealthShadow/Light.position.x = -steps * 0.82
 	
-	$Animate.play("hurt" + str(rng.randi_range(1, 4)))
 	lastDamage = maxHealth - currentHealth
+	
+	if Global.calculatedDamage != 0:
+		$Animate.play("hurt" + str(rng.randi_range(1, 4)))
+	
 
 func setup():
 	rng.randomize()

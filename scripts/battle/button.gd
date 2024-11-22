@@ -43,10 +43,20 @@ func reset_moves():
 	if identity == "moves":
 		if int(str(name)[-1]) <= Global.field['Friends'][Global.selectedFriend]['Moves'].size() - 1:
 			$Sprite/Label.text = Global.field['Friends'][Global.selectedFriend]['Moves'][int(str(name)[-1])]
+			$Area2D.input_pickable = true
+			resize_text($Sprite/Label, 1)
 		else:
 			$Sprite/Label.text = "..."
 			$Area2D.input_pickable = false
 		setup()
+
+func resize_text(label, limit = 2):
+	var fontSize = 16
+	label.add_theme_font_size_override("font_size", fontSize)
+	
+	while label.get_line_count() > limit:
+		fontSize -= 1
+		label.add_theme_font_size_override("font_size", fontSize)
 
 func setup():
 	rng.randomize()

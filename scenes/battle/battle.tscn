@@ -26,9 +26,11 @@ metadata/_edit_lock_ = true
 position_smoothing_enabled = true
 
 [node name="Friend" parent="." groups=["friend"] instance=ExtResource("2_yw6be")]
+z_index = 1
 position = Vector2(-80, 0)
 
 [node name="Enemy" parent="." groups=["enemy"] instance=ExtResource("2_yw6be")]
+z_index = 1
 position = Vector2(80, -48)
 metadata/_edit_lock_ = true
 
@@ -42,6 +44,7 @@ metadata/_edit_lock_ = true
 [node name="Textbox" parent="." instance=ExtResource("2_5nmul")]
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -128.0
 offset_top = -96.0
 offset_right = -94.0

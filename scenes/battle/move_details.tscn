@@ -20547,6 +20547,7 @@ _data = {
 }
 
 [node name="MoveDetails" type="Node2D"]
+z_index = 1
 texture_filter = 1
 position = Vector2(-68, 0)
 script = ExtResource("1_36wug")

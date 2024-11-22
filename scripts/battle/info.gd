@@ -16,14 +16,16 @@ func start_battle():
 		
 		$Animate.play("SetupFriend")
 		Global.friendInfo.connect(intro)
-		Global.switchFriend.connect(switch)
+		Global.switchFriend.connect(hide_info)
+		Global.hideFriendInfo.connect(hide_info)
 	elif is_in_group("enemy"):
 		team = "Enemies"
 		$Healthbar.team = team
 		
 		$Animate.play("SetupEnemy")
 		Global.enemyInfo.connect(intro)
-		Global.switchEnemy.connect(switch)
+		Global.switchEnemy.connect(hide_info)
+		Global.hideEnemyInfo.connect(hide_info)
 	
 	Global.takeDamage.connect(hurt)
 
@@ -41,7 +43,7 @@ func intro():
 		else:
 			$Animate.play("EnemyPopup")
 
-func switch():
+func hide_info():
 	if team == "Friends":
 		$Animate.play("SlideOutFriend")
 	elif team == "Enemies":
@@ -57,7 +59,10 @@ func hurt():
 			$Animate.play("ChangeHealth")
 
 func set_new_health():
-	$HealthStub/Num.text = str(Global.field[team][id]['Health']['Current']) + "/" + str(Global.field[team][id]['Health']['Max'])
+	if Global.field[team].size() > id: 
+		var level = Global.field[team][id]['Level']
+		var health = Global.field[team][id]['Health']
+		$HealthStub/Num.text = str(round(health['Current'] * (0.05) * level)) + "/" + str(round(health['Max'] * (0.05) * level))
 
 func setup():
 	$Healthbar.id = id
@@ -86,7 +91,10 @@ func setup():
 	if Global.field[team].size() > 0:
 		$Name/Label.text = Global.field[team][id]['Name']
 		$Level/HBoxContainer/Num.text = str(Global.field[team][id]['Level'])
-		$HealthStub/Num.text = str(Global.field[team][id]['Health']['Current']) + "/" + str(Global.field[team][id]['Health']['Max'])
+		
+		var level = Global.field[team][id]['Level']
+		var health = Global.field[team][id]['Health']
+		$HealthStub/Num.text = str(round(health['Current'] * (0.05) * level)) + "/" + str(round(health['Max'] * (0.05) * level))
 	
 	resize_text($Name/Label, 1)
 

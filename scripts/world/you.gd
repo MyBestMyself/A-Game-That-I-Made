@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_just_released(direction):
 			directionQueue.erase(direction)
 	
-	if not Global.battling:
+	if not Global.battling and not Global.speaking:
 		move_character()
 	
 	if directionQueue.size() == 0:

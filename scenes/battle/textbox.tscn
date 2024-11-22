@@ -93,7 +93,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_7m7ro"]
 resource_name = "FriendsList"
 length = 0.4
-step = 0.01
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

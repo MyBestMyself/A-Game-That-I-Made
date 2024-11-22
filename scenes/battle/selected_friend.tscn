@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://rwhp81gr4gdf"]
+[gd_scene load_steps=21 format=3 uid="uid://rwhp81gr4gdf"]
 
 [ext_resource type="Texture2D" uid="uid://cqgf63lpvem7j" path="res://sprites/paper/stickyNote.png" id="1_is1r2"]
 [ext_resource type="Script" path="res://scripts/battle/selected_friend.gd" id="1_jjc5d"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dhpgrnqjuqdk1" path="res://sprites/friends/Geobro.png" id="3_ogaga"]
 [ext_resource type="FontFile" uid="uid://b0ex4t4yscccb" path="res://assets/fonts/Mybestfont-Regular.ttf" id="3_xok8j"]
 [ext_resource type="Texture2D" uid="uid://b6nw4a01emysq" path="res://sprites/paper/stampShort.png" id="4_6kle2"]
+[ext_resource type="Texture2D" uid="uid://iqo2bwe8lf65" path="res://sprites/battle/bottomX.png" id="4_r0h1w"]
+[ext_resource type="Texture2D" uid="uid://cstruyka3xvim" path="res://sprites/battle/topX.png" id="5_024op"]
 [ext_resource type="Texture2D" uid="uid://t144yi3whybk" path="res://sprites/battle/Health1.png" id="7_5krcb"]
 [ext_resource type="Texture2D" uid="uid://b6haxnsf1ln0m" path="res://sprites/paper/stampStub.png" id="8_ths1i"]
 
@@ -169,6 +171,30 @@ hframes = 6
 [node name="Drawing" type="Sprite2D" parent="Sticky"]
 position = Vector2(-0.5, -0.5)
 texture = ExtResource("3_ogaga")
+
+[node name="X" type="Node2D" parent="Sticky"]
+visible = false
+z_index = 1
+
+[node name="BottomXShadow" type="Sprite2D" parent="Sticky/X"]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(1, 1)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("4_r0h1w")
+
+[node name="BottomX" type="Sprite2D" parent="Sticky/X"]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("4_r0h1w")
+
+[node name="TopXShadow" type="Sprite2D" parent="Sticky/X"]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(1, 1)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("5_024op")
+
+[node name="TopX" type="Sprite2D" parent="Sticky/X"]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("5_024op")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(-44, 0)

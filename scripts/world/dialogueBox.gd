@@ -23,6 +23,7 @@ func playDialogue():
 		
 		if Dialogue.text[Dialogue.currentSpeaker][Dialogue.textIndex] in keywords:
 			speaking = false
+			Global.speaking = false
 			$Animate.play("slideOut")
 			keyword_behavior(Dialogue.text[Dialogue.currentSpeaker][Dialogue.textIndex])
 		else:

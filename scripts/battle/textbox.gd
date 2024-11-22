@@ -3,6 +3,7 @@ extends Node2D
 var rng = RandomNumberGenerator.new()
 var text = preload("res://scenes/battle/battle_text_stamp.tscn")
 var moveDetails = preload("res://scenes/battle/move_details.tscn")
+var statusDetails = preload("res://scenes/battle/status_details.tscn")
 
 func _ready():
 	Global.startBattle.connect(start_battle)
@@ -14,8 +15,11 @@ func start_battle() -> void:
 	Global.showMoves.connect(show_moves)
 	Global.showFriendsList.connect(show_friends_list)
 	Global.showMoveDetails.connect(show_move_details)
+	Global.showStatusDetails.connect(show_status_details)
 	Global.startNextTurn.connect(start_next_turn)
+	Global.resumeBattleAfterDown.connect(resume_battle_after_down)
 	Global.displayMoveText.connect(display_move_text)
+	Global.checkForDown.connect(check_for_down)
 	
 	play_intro("trainer")
 
@@ -66,15 +70,35 @@ func display_move_text():
 	$CombatManager.append_move_text()
 	
 	if Global.battleTextQueue.size() > 0:
+		if typeof(Global.battleTextQueue[0]) == TYPE_ARRAY:
+			process_move(Global.battleTextQueue[0])
 		write()
+		
 		for x in Global.battleTextQueue.size():
+			if typeof(Global.battleTextQueue[0]) == TYPE_ARRAY:
+				process_move(Global.battleTextQueue[0])
+			
 			var delay = 1
-			then_write(delay) 
+			then_write(delay)
 			await get_tree().create_timer(delay).timeout
 		await get_tree().create_timer(1).timeout
 	
 	Global.moveQueue.remove_at(0)
 	next_turn()
+
+func process_move(move_data):
+	var id = move_data[0]
+	var team = move_data[1]
+	
+	if team == "Friend":
+		Global.emit_signal("downFriend", id)
+		Global.field['Friends'].remove_at(id)
+	elif team == "Enemy":
+		Global.emit_signal("downEnemy", id)
+		Global.field['Enemies'].remove_at(id)
+	
+	cleanup_move_queue(team, id)
+	Global.battleTextQueue[0] = move_data[2]
 
 func next_turn():
 	clear_text()
@@ -98,12 +122,58 @@ func next_turn():
 			Global.switchEnemy.emit()
 		else: #ATTACK
 			then_write(0.5, selectedName + " used " + selectedMove['Name'])
+			var miss = $CombatManager.calculate_damage()
 			
-			$CombatManager.calculate_damage()
-			Global.attack.emit()
+			if miss:
+				await get_tree().create_timer(1.5).timeout
+				display_move_text()
+			else:
+				Global.attack.emit()
+	elif len(Global.field['Friends']) > 1 - Global.fieldCapacity and len(Global.field['Enemies']) > 1 - Global.fieldCapacity:
+		then_write(0.5, "What will " + Global.field['Friends'][0]['Name'] + " do?")
+		actions()
+
+func check_for_down():
+	#If friend is dead, open menu
+	if len(Global.field['Friends']) == 1 - Global.fieldCapacity:
+		show_friends_list()
+	elif len(Global.field['Enemies']) == 1 - Global.fieldCapacity:
+		Global.currentEnemy += 1
+		Global.field['Enemies'].append(Data.enemies[Global.currentEnemy])
+		write("Ellie sent out " + Global.field['Enemies'][0]['Name'])
+		Global.calculatedDamage = null
+		Global.sendEnemy.emit()
+		await get_tree().create_timer(1.5).timeout
+		next_turn()
 	else:
 		then_write(0.5, "What will " + Global.field['Friends'][0]['Name'] + " do?")
 		actions()
+
+func cleanup_move_queue(team, id):
+	var index = 1
+	while index < len(Global.moveQueue):
+		var move = Global.moveQueue[1]
+		#Dequeue moves that friend planned to use
+		if move['Team'] == team:
+			Global.moveQueue.remove_at(index)
+		
+		#Dequeue moves targeting friend
+		elif move['Move']['Reciever'] == "Target" and id == move['TargetId']:
+			Global.moveQueue.remove_at(index)
+		
+		#Otherwise skip over
+		else:
+			index += 1
+
+func resume_battle_after_down():
+	$FriendsList/Animate.play("SlideOut")
+	write("Go " + Global.selectedMove['Name'] + "!")
+	
+	Global.calculatedDamage = null
+	Global.sendFriend.emit()
+	
+	await get_tree().create_timer(1.5).timeout
+	next_turn()
 
 func write(message = null):
 	if message != null:
@@ -134,9 +204,13 @@ func show_friends_list():
 	Global.currentMenu = "friends"
 	$Animate.play("FriendsList")
 	$FriendsList.setup()
+	setup_buttons()
 
 func show_move_details():
 	add_child(moveDetails.instantiate())
+
+func show_status_details():
+	add_child(statusDetails.instantiate())
 
 func close_menu():
 	match Global.currentMenu:
@@ -145,9 +219,10 @@ func close_menu():
 			$Animate.play("HideMoves")
 			setup_buttons()
 		"friends":
-			Global.currentMenu = "actions"
-			$Animate.play_backwards("FriendsList")
-			setup_buttons()
+			if len(Global.field['Friends']) > 1 - Global.fieldCapacity:
+				Global.currentMenu = "actions"
+				$Animate.play_backwards("FriendsList")
+				setup_buttons()
 
 func setup_buttons():
 	for x in $Actions.get_children():

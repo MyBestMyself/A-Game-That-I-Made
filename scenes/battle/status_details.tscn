@@ -1,0 +1,242 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgv8t88upit1p"]
+
+[ext_resource type="Script" path="res://scripts/battle/status_details.gd" id="1_q22u8"]
+[ext_resource type="Texture2D" uid="uid://br66ok0v5wvrx" path="res://sprites/paper/stampBig.png" id="2_2pt34"]
+[ext_resource type="Texture2D" uid="uid://cefushwrp1idf" path="res://sprites/battle/statusConditions/burnt.png" id="3_32wal"]
+[ext_resource type="FontFile" uid="uid://b0ex4t4yscccb" path="res://assets/fonts/Mybestfont-Regular.ttf" id="3_pybju"]
+
+[sub_resource type="FontVariation" id="FontVariation_2ipuw"]
+base_font = ExtResource("3_pybju")
+spacing_glyph = -1
+
+[sub_resource type="Animation" id="Animation_6opri"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatusDescription:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllStats:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 48)]
+}
+
+[sub_resource type="Animation" id="Animation_x765p"]
+resource_name = "StatusDetails"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StatusDescription:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 48), Vector2(0, -26)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllStats:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 48), Vector2(0, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rh5hh"]
+_data = {
+"RESET": SubResource("Animation_6opri"),
+"StatusDetails": SubResource("Animation_x765p")
+}
+
+[node name="StatusDetails" type="Node2D"]
+z_index = 1
+texture_filter = 1
+position = Vector2(-68, 0)
+script = ExtResource("1_q22u8")
+
+[node name="StatusDescription" type="Node2D" parent="."]
+position = Vector2(0, 48)
+
+[node name="Shadow" type="Sprite2D" parent="StatusDescription"]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(1, 1)
+texture = ExtResource("2_2pt34")
+hframes = 4
+
+[node name="Sprite" type="Sprite2D" parent="StatusDescription"]
+texture = ExtResource("2_2pt34")
+hframes = 4
+
+[node name="Icon" type="Sprite2D" parent="StatusDescription/Sprite"]
+position = Vector2(-40, 4)
+scale = Vector2(2, 2)
+texture = ExtResource("3_32wal")
+
+[node name="Name" type="Label" parent="StatusDescription/Sprite"]
+offset_left = -55.0
+offset_top = -15.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 12
+text = "Name
+"
+autowrap_mode = 3
+max_lines_visible = 1
+
+[node name="Effect1" type="Label" parent="StatusDescription/Sprite"]
+offset_left = -28.0
+offset_top = -6.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 12
+text = "-12.5% Hp per turn
+"
+autowrap_mode = 3
+max_lines_visible = 1
+
+[node name="Effect2" type="Label" parent="StatusDescription/Sprite"]
+offset_left = -28.0
+offset_top = -6.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 12
+text = "-25% Strength
+"
+vertical_alignment = 2
+autowrap_mode = 3
+max_lines_visible = 1
+
+[node name="AllStats" type="Node2D" parent="."]
+position = Vector2(0, 48)
+
+[node name="Shadow" type="Sprite2D" parent="AllStats"]
+modulate = Color(0, 0, 0, 0.196078)
+position = Vector2(1, 1)
+texture = ExtResource("2_2pt34")
+hframes = 4
+
+[node name="Sprite" type="Sprite2D" parent="AllStats"]
+texture = ExtResource("2_2pt34")
+hframes = 4
+
+[node name="Hp" type="Label" parent="AllStats/Sprite"]
+offset_left = -55.0
+offset_top = -15.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 10
+text = "Hp: +12.5%"
+max_lines_visible = 1
+
+[node name="Speed" type="Label" parent="AllStats/Sprite"]
+offset_top = -15.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 10
+text = "Speed: 100%"
+max_lines_visible = 1
+
+[node name="Strength" type="Label" parent="AllStats/Sprite"]
+offset_left = -55.0
+offset_top = -8.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 10
+text = "Strength: 100%"
+max_lines_visible = 1
+
+[node name="Smarts" type="Label" parent="AllStats/Sprite"]
+offset_top = -8.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 10
+text = "Smarts: 100%"
+max_lines_visible = 1
+
+[node name="Resistance" type="Label" parent="AllStats/Sprite"]
+offset_left = -55.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 10
+text = "Resistance: 100%"
+max_lines_visible = 1
+
+[node name="Resolve" type="Label" parent="AllStats/Sprite"]
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 10
+text = "Resolve: 100%"
+max_lines_visible = 1
+
+[node name="Accuracy" type="Label" parent="AllStats/Sprite"]
+offset_left = -55.0
+offset_top = 7.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 10
+text = "Accuracy: 100%"
+max_lines_visible = 1
+
+[node name="Dodge" type="Label" parent="AllStats/Sprite"]
+offset_top = 7.0
+offset_right = 55.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_2ipuw")
+theme_override_font_sizes/font_size = 10
+text = "Dodge: 100%"
+max_lines_visible = 1
+
+[node name="Animate" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rh5hh")
+}
+
+[node name="KillTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]
